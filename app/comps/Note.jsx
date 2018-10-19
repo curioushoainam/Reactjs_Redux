@@ -6,7 +6,9 @@ export default class Note extends React.Component{
 		this.del = this.del.bind(this);
 	}
 	del(){
-		this.props.rmv(this.props.ind);
+		// this.props.rmv(this.props.ind);
+		var {ind, rmv} = this.props;
+		rmv(ind);
 	}
 	render(){
 		return(

@@ -4,7 +4,7 @@ module.exports = {
 		path: __dirname,
 		filename: './public/bundle.js'		// destination
 	},
-	mode: 'development',
+	mode: 'development',	
 	module:{
 		rules: [{
 			test: /\.jsx?$/,
@@ -15,7 +15,7 @@ module.exports = {
 					presets: ['env', 'react','es2015']
 				}
 			}]	
-		}]
+		}]		
 	}
 };
 

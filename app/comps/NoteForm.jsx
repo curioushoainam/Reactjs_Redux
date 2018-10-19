@@ -1,21 +1,20 @@
-var React = require('react');
+import React from 'react';
 
 export default class NoteForm extends React.Component{
 	constructor(props){
-		super(props);
-		this.add = this.add.bind(this);
+		super(props);		
 	}
-	add(){
-		var txt = this.refs.txt.value;
-		this.refs.txt.value= '';
-		this.props.plus(txt);
+	handleSubmit(e){
+		e.preventDefault();		
+		this.props.handleAdd(this.refs.txt.value);
+		this.refs.txt.value = '';
 	}
 	render(){
 		return(
-			<div>
+			<form onSubmit={this.handleSubmit.bind(this)}>
 				<input type="text" ref="txt" placeholder="Enter your note!" />
 				<button onClick={this.add} >Add</button>
-			</div>
+			</form>
 		);
 	}
 }

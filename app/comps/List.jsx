@@ -9,7 +9,7 @@ class List extends React.Component{
 			arr: ["Nodejs","React","HTML","JS"]
 		}
 		this.del = this.del.bind(this);
-		this.addNote = this.addNote.bind(this);
+		this.add = this.add.bind(this);
 	}
 	
 	del(index){
@@ -17,7 +17,7 @@ class List extends React.Component{
 		this.setState(this.state);
 	}
 	
-	addNote(txt){
+	add(txt){
 		this.state.arr.push(txt);
 		this.setState(this.state);
 	}
@@ -25,7 +25,7 @@ class List extends React.Component{
 	render(){
 		return(			
 			<div>
-				<NoteForm plus={this.addNote} />
+				<NoteForm handleAdd={this.add} />
 			{
 				this.state.arr.map((item, ind)=>{
 					return <Note key={ind} ind={ind} rmv={this.del} >{item}</Note>
