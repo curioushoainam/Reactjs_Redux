@@ -19,13 +19,22 @@ var reducer = (state = defaultState, action) => {
 		default:
 			return state;
 	} 	
-}
+};
 
-var store = redux.createStore(reducer);
+// var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, redux.compose(
+	window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : noop => noop
+));
+
 console.log('init : ',store.getState());
 
 // monitor the change of state
 store.subscribe(()=>console.log(store.getState()));
+
+store.subscribe(()=>{
+	var str = store.getState();
+	document.getElementById('p-detail').innerHTML = JSON.stringify(str);	// convert str into json type
+});
 
 // implement the action in reducer
 store.dispatch({type: 'TOGGLE_IS_ADDING'});
