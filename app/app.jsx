@@ -37,3 +37,15 @@ array[1] = 200;
 console.log('arr1 : ', arr1);
 console.log('arr2 : ', arr2);
 console.log('arr3 : ', arr3);
+
+var add = (a,b)=>{
+/**	
+ * pure function has to 3 condition
+ * 1. no change input values
+ * 2. no Assyn tasks
+ * 3. one input => one out
+ */
+	return a+b;
+}
+
+console.log('pure function : ', add(2,3));
