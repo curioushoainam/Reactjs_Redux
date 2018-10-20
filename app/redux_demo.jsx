@@ -1,25 +1,53 @@
 var redux = require('redux');
 
-var defaultState = {
-	arr: ['PHP','NODEJS','REACTJS'],
-	isAdding: false
-};
+// var defaultState = {
+// 	arr: ['PHP','NODEJS','REACTJS'],
+// 	isAdding: false
+// };
 
-var reducer = (state = defaultState, action) => {
+// var reducer = (state = defaultState, action) => {
+// 	switch(action.type){
+// 		case 'TOGGLE_IS_ADDING':
+// 			return {...state, isAdding: !state.isAdding}			
+
+// 		case 'ADD_ITEM':
+// 			return {...state, arr: [...state.arr, action.item]}
+
+// 		case 'REMOVE_ITEM':
+// 			return {...state, arr: state.arr.filter((e,i)=>i != action.index)}
+
+// 		default:
+// 			return state;
+// 	} 	
+// };
+
+var arrReducer = (state = ['PHP','NODEJS','REACTJS'], action) => {
 	switch(action.type){
-		case 'TOGGLE_IS_ADDING':
-			return {...state, isAdding: !state.isAdding}			
-
 		case 'ADD_ITEM':
-			return {...state, arr: [...state.arr, action.item]}
+			return [...state, action.item]
 
 		case 'REMOVE_ITEM':
-			return {...state, arr: state.arr.filter((e,i)=>i != action.index)}
+			return state.filter((e,i)=>i != action.index)
+
+		default:
+			return state;
+	}
+};
+
+var isAddingReducer = (state = false, action)=>{
+	switch(action.type){
+		case 'TOGGLE_IS_ADDING':
+			return !state
 
 		default:
 			return state;
 	} 	
 };
+
+var reducer = redux.combineReducers({
+	arr: arrReducer,
+	isAdding: isAddingReducer
+});
 
 // var store = redux.createStore(reducer);
 var store = redux.createStore(reducer, redux.compose(
