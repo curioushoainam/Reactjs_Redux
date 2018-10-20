@@ -1,10 +1,11 @@
 var React = require('react');
 import {connect} from 'react-redux';
+import {removeItem} from 'action';
 
 class Note extends React.Component{		
 	del(){		
 		var {ind, dispatch} = this.props;
-		dispatch({type: 'REMOVE_ITEM', index: ind});
+		dispatch(removeItem(ind));
 	}
 	render(){
 		return(

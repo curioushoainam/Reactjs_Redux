@@ -3,31 +3,14 @@ import Note from 'Note';
 import NoteForm from 'NoteForm';
 import {connect} from 'react-redux';	// connect is a function and return a function
 
-class List extends React.Component{
-	constructor(props){
-		super(props);
-		
-		this.del = this.del.bind(this);
-		this.add = this.add.bind(this);
-	}
-	
-	del(index){
-		this.state.arr.splice(index,1);
-		this.setState(this.state);
-	}
-	
-	add(txt){
-		this.state.arr.push(txt);
-		this.setState(this.state);
-	}
-
+class List extends React.Component{	
 	render(){
 		return(			
 			<div>
-				<NoteForm handleAdd={this.add} />
+				<NoteForm />
 			{
 				this.props.arr.map((item, ind)=>{		// because arr becomes a props on the connect function
-					return <Note key={ind} ind={ind} rmv={this.del} >{item}</Note>
+					return <Note key={ind} ind={ind} >{item}</Note>
 				})
 				
 			}

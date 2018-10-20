@@ -10,6 +10,7 @@ module.exports = {
 		alias: {
 			reducer: 'app/reducer/reducer.js',
 			store: 'app/storeConfig.jsx',
+			action: 'app/action.js',
 			List: 'app/comps/List.jsx',
 			Note: 'app/comps/Note.jsx',
 			NoteForm: 'app/comps/NoteForm.jsx'
