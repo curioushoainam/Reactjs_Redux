@@ -1,24 +1,21 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export default class NoteForm extends React.Component{
-	constructor(props){
-		super(props);	
-		this.state = { isAdding: false }	
-	}
+class NoteForm extends React.Component{	
 	handleSubmit(e){
 		e.preventDefault();		
-		this.props.handleAdd(this.refs.txt.value);
-		this.refs.txt.value = '';
-		this.toggle();
+		var {dispatch} = this.props;
+		dispatch({type: 'ADD_ITEM', item: this.refs.txt.value});		
+		dispatch({type: 'TOGGLE_IS_ADDING'});
 	}
 
 	toggle(){
-		this.state.isAdding = !this.state.isAdding;
-		this.setState(this.state);
+		var {dispatch} = this.props;  	// var dispatch = this.props.dispatch;   // dispatch function can revoke anywhere
+		dispatch({type: 'TOGGLE_IS_ADDING'});
 	}
 
 	render(){
-		if(this.state.isAdding) 
+		if(this.props.isAdding) 
 			return(
 				<form onSubmit={this.handleSubmit.bind(this)}>
 					<input type="text" ref="txt" placeholder="Enter your note!" />
@@ -32,3 +29,7 @@ export default class NoteForm extends React.Component{
 
 	}
 }
+
+module.exports = connect(function(state){
+	return {isAdding: state.isAdding}		// can return multiple states
+})(NoteForm);

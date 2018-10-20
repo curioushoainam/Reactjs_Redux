@@ -1,21 +1,19 @@
 var React = require('react');
+import {connect} from 'react-redux';
 
-export default class Note extends React.Component{	
-	constructor(props){
-		super(props);
-		this.del = this.del.bind(this);
-	}
-	del(){
-		// this.props.rmv(this.props.ind);
-		var {ind, rmv} = this.props;
-		rmv(ind);
+class Note extends React.Component{		
+	del(){		
+		var {ind, dispatch} = this.props;
+		dispatch({type: 'REMOVE_ITEM', index: ind});
 	}
 	render(){
 		return(
 			<div>
 				<p>{this.props.children}</p>
-				<button onClick={this.del}>Delete</button>
+				<button onClick={this.del.bind(this)}>Delete</button>
 			</div>
 		)		
 	}
 }
+
+module.exports = connect()(Note);	// connect() because this component has no state
