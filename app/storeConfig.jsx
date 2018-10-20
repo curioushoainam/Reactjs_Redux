@@ -1,5 +1,5 @@
 var redux = require('redux');
-import reducer from './reducer/reducer.js';
+import reducer from 'reducer';
 
 // var store = redux.createStore(reducer);
 var store = redux.createStore(reducer, redux.compose(

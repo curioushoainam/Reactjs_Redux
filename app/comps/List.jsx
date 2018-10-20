@@ -1,6 +1,6 @@
 var React = require('react');
-import Note from './Note.jsx';
-import NoteForm from './NoteForm.jsx';
+import Note from 'Note';
+import NoteForm from 'NoteForm';
 import {connect} from 'react-redux';	// connect is a function and return a function
 
 class List extends React.Component{
