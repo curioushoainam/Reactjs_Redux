@@ -22,20 +22,20 @@ var reducer = (state = defaultState, action) => {
 }
 
 var store = redux.createStore(reducer);
-console.log(store.getState());
+console.log('init : ',store.getState());
+
+// monitor the change of state
+store.subscribe(()=>console.log(store.getState()));
 
 // implement the action in reducer
 store.dispatch({type: 'TOGGLE_IS_ADDING'});
-console.log(store.getState());
 
 store.dispatch({
 	type: 'ADD_ITEM',
 	item: 'LARAVEL'
 });
-console.log(store.getState());
 
 store.dispatch({
 	type: 'REMOVE_ITEM',
 	index: 0
 });
-console.log(store.getState());
