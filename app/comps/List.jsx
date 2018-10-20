@@ -1,13 +1,12 @@
 var React = require('react');
 import Note from './Note.jsx';
 import NoteForm from './NoteForm.jsx';
+import {connect} from 'react-redux';	// connect is a function and return a function
 
 class List extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {
-			arr: ["Nodejs","React","HTML","JS"]
-		}
+		
 		this.del = this.del.bind(this);
 		this.add = this.add.bind(this);
 	}
@@ -27,7 +26,7 @@ class List extends React.Component{
 			<div>
 				<NoteForm handleAdd={this.add} />
 			{
-				this.state.arr.map((item, ind)=>{
+				this.props.arr.map((item, ind)=>{		// because arr becomes a props on the connect function
 					return <Note key={ind} ind={ind} rmv={this.del} >{item}</Note>
 				})
 				
@@ -37,4 +36,6 @@ class List extends React.Component{
 	}
 }
 
-module.exports = List;
+module.exports = connect(function(state){
+	return {arr: state.arr}					// arr comes from the store of the redux_demo.jsx file; arr becomes a props
+})(List);

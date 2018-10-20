@@ -76,3 +76,5 @@ store.dispatch({
 	type: 'REMOVE_ITEM',
 	index: 0
 });
+
+module.exports = store;
