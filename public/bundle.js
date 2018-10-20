@@ -94,7 +94,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _List = __webpack_require__(/*! ./comps/List.jsx */ \"./app/comps/List.jsx\");\n\nvar _List2 = _interopRequireDefault(_List);\n\nvar _redux_demo = __webpack_require__(/*! ./redux_demo.jsx */ \"./app/redux_demo.jsx\");\n\nvar _redux_demo2 = _interopRequireDefault(_redux_demo);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nvar ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _require = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\"),\n    Provider = _require.Provider; // var Provider = require('react-redux').Provider;\n\n\nReactDOM.render(React.createElement(\n\tProvider,\n\t{ store: _redux_demo2.default },\n\tReact.createElement(_List2.default, null)\n), document.getElementById('root'));\n\n//# sourceURL=webpack:///./app/app.jsx?");
+eval("\n\nvar _List = __webpack_require__(/*! ./comps/List.jsx */ \"./app/comps/List.jsx\");\n\nvar _List2 = _interopRequireDefault(_List);\n\nvar _storeConfig = __webpack_require__(/*! ./storeConfig.jsx */ \"./app/storeConfig.jsx\");\n\nvar _storeConfig2 = _interopRequireDefault(_storeConfig);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nvar ReactDOM = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _require = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\"),\n    Provider = _require.Provider; // var Provider = require('react-redux').Provider;\n\n\nReactDOM.render(React.createElement(\n\tProvider,\n\t{ store: _storeConfig2.default },\n\tReact.createElement(_List2.default, null)\n), document.getElementById('root'));\n\n//# sourceURL=webpack:///./app/app.jsx?");
 
 /***/ }),
 
@@ -134,15 +134,51 @@ eval("\n\nvar _createClass = function () { function defineProperties(target, pro
 
 /***/ }),
 
-/***/ "./app/redux_demo.jsx":
-/*!****************************!*\
-  !*** ./app/redux_demo.jsx ***!
-  \****************************/
+/***/ "./app/reducer/arrReducer.js":
+/*!***********************************!*\
+  !*** ./app/reducer/arrReducer.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\nvar redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\nvar arrReducer = function arrReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['PHP', 'NODEJS', 'REACTJS'];\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase 'ADD_ITEM':\n\t\t\treturn [].concat(_toConsumableArray(state), [action.item]);\n\n\t\tcase 'REMOVE_ITEM':\n\t\t\treturn state.filter(function (e, i) {\n\t\t\t\treturn i != action.index;\n\t\t\t});\n\n\t\tdefault:\n\t\t\treturn state;\n\t}\n};\n\nvar isAddingReducer = function isAddingReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase 'TOGGLE_IS_ADDING':\n\t\t\treturn !state;\n\n\t\tdefault:\n\t\t\treturn state;\n\t}\n};\n\nvar reducer = redux.combineReducers({\n\tarr: arrReducer,\n\tisAdding: isAddingReducer\n});\n\n// var store = redux.createStore(reducer);\nvar store = redux.createStore(reducer, redux.compose(window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : function (noop) {\n\treturn noop;\n}));\n\nconsole.log('init : ', store.getState());\n\n// monitor the change of state\nstore.subscribe(function () {\n\treturn console.log(store.getState());\n});\n\nstore.subscribe(function () {\n\tvar str = store.getState();\n\tdocument.getElementById('p-detail').innerHTML = JSON.stringify(str); // convert str into json type\n});\n\n// implement the action in reducer\n// store.dispatch({type: 'TOGGLE_IS_ADDING'});\n\n// store.dispatch({\n// \ttype: 'ADD_ITEM',\n// \titem: 'LARAVEL'\n// });\n\n// store.dispatch({\n// \ttype: 'REMOVE_ITEM',\n// \tindex: 0\n// });\n\nmodule.exports = store;\n\n//# sourceURL=webpack:///./app/redux_demo.jsx?");
+eval("\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\nvar arrReducer = function arrReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['PHP', 'NODEJS', 'REACTJS'];\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase 'ADD_ITEM':\n\t\t\treturn [].concat(_toConsumableArray(state), [action.item]);\n\n\t\tcase 'REMOVE_ITEM':\n\t\t\treturn state.filter(function (e, i) {\n\t\t\t\treturn i != action.index;\n\t\t\t});\n\n\t\tdefault:\n\t\t\treturn state;\n\t}\n};\n\nmodule.exports = arrReducer;\n\n//# sourceURL=webpack:///./app/reducer/arrReducer.js?");
+
+/***/ }),
+
+/***/ "./app/reducer/isAddingReducer.js":
+/*!****************************************!*\
+  !*** ./app/reducer/isAddingReducer.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar isAddingReducer = function isAddingReducer() {\n\tvar state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;\n\tvar action = arguments[1];\n\n\tswitch (action.type) {\n\t\tcase 'TOGGLE_IS_ADDING':\n\t\t\treturn !state;\n\n\t\tdefault:\n\t\t\treturn state;\n\t}\n};\n\nmodule.exports = isAddingReducer;\n\n//# sourceURL=webpack:///./app/reducer/isAddingReducer.js?");
+
+/***/ }),
+
+/***/ "./app/reducer/reducer.js":
+/*!********************************!*\
+  !*** ./app/reducer/reducer.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _arrReducer = __webpack_require__(/*! ./arrReducer.js */ \"./app/reducer/arrReducer.js\");\n\nvar _arrReducer2 = _interopRequireDefault(_arrReducer);\n\nvar _isAddingReducer = __webpack_require__(/*! ./isAddingReducer.js */ \"./app/reducer/isAddingReducer.js\");\n\nvar _isAddingReducer2 = _interopRequireDefault(_isAddingReducer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\n\nvar reducer = redux.combineReducers({\n\tarr: _arrReducer2.default,\n\tisAdding: _isAddingReducer2.default\n});\n\n// import arrReducer as arr from './arrReducer';\n// import isAddingReducer as isAdding from './isAddingReducer';\n// var reducer = redux.combineReducers({ arr, isAdding });\n\nmodule.exports = reducer;\n\n//# sourceURL=webpack:///./app/reducer/reducer.js?");
+
+/***/ }),
+
+/***/ "./app/storeConfig.jsx":
+/*!*****************************!*\
+  !*** ./app/storeConfig.jsx ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _reducer = __webpack_require__(/*! ./reducer/reducer.js */ \"./app/reducer/reducer.js\");\n\nvar _reducer2 = _interopRequireDefault(_reducer);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar redux = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n\n\n// var store = redux.createStore(reducer);\nvar store = redux.createStore(_reducer2.default, redux.compose(window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : function (noop) {\n\treturn noop;\n}));\n\n// monitor the change of state\n// store.subscribe(()=>console.log(store.getState()))\n\nmodule.exports = store;\n\n//# sourceURL=webpack:///./app/storeConfig.jsx?");
 
 /***/ }),
 
